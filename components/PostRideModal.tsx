@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { RideType, Ride, Driver, Vehicle } from '../types';
 import { Button } from './Button';
 import { X } from 'lucide-react';
@@ -32,6 +32,16 @@ export const PostRideModal: React.FC<PostRideModalProps> = ({
     type: RideType.SHARED,
     description: ''
   });
+
+  const timeOptions = useMemo(() => {
+    const options = [];
+    for (let i = 0; i < 24; i++) {
+      for (let j = 0; j < 60; j += 15) {
+        options.push(`${i.toString().padStart(2, '0')}:${j.toString().padStart(2, '0')}`);
+      }
+    }
+    return options;
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -125,7 +135,19 @@ export const PostRideModal: React.FC<PostRideModalProps> = ({
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">Giờ đón (24h)</label>
-              <input type="time" name="time" required value={formData.time} onChange={handleChange} className="w-full px-3 py-2 border border-slate-300 rounded-lg" />
+               <select
+                name="time"
+                required
+                value={formData.time}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none appearance-none bg-white text-slate-900"
+              >
+                {timeOptions.map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Vehicle & Pricing */}

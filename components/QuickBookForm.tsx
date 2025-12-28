@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Button } from './Button';
 import { MapPin, Calendar, Clock, User, Phone } from 'lucide-react';
 import { POPULAR_LOCATIONS } from '../services/mockData';
@@ -20,6 +20,16 @@ export const QuickBookForm: React.FC<QuickBookFormProps> = ({ onSubmit, classNam
     seats: 1,
     note: ''
   });
+
+  const timeOptions = useMemo(() => {
+    const options = [];
+    for (let i = 0; i < 24; i++) {
+      for (let j = 0; j < 60; j += 15) {
+        options.push(`${i.toString().padStart(2, '0')}:${j.toString().padStart(2, '0')}`);
+      }
+    }
+    return options;
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -84,7 +94,24 @@ export const QuickBookForm: React.FC<QuickBookFormProps> = ({ onSubmit, classNam
           <label className="block text-sm font-medium text-slate-700 mb-1">Giờ đi (24h)</label>
           <div className="relative">
             <Clock size={16} className="absolute left-3 top-3 text-slate-400" />
-            <input type="time" name="time" required value={formData.time} onChange={handleChange} className="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+            <select
+              name="time"
+              required
+              value={formData.time}
+              onChange={handleChange}
+              className="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none appearance-none bg-white text-slate-900"
+            >
+              {timeOptions.map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+            </select>
+            <div className="absolute right-3 top-3 pointer-events-none">
+              <svg className="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
