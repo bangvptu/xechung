@@ -124,7 +124,7 @@ export const PostRideModal: React.FC<PostRideModalProps> = ({
               <input type="date" name="date" required value={formData.date} onChange={handleChange} className="w-full px-3 py-2 border border-slate-300 rounded-lg" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Giờ đón</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Giờ đón (24h)</label>
               <input type="time" name="time" required value={formData.time} onChange={handleChange} className="w-full px-3 py-2 border border-slate-300 rounded-lg" />
             </div>
 

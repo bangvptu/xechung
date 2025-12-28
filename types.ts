@@ -1,3 +1,4 @@
+
 export enum RideType {
   SHARED = 'Xe ghép',
   PRIVATE = 'Bao xe',
@@ -65,6 +66,12 @@ export interface RideRequest {
   note?: string;
   status: 'pending' | 'accepted' | 'cancelled';
   createdAt: string;
+  // Fields for assigned driver
+  assignedDriverId?: string;
+  assignedDriverName?: string;
+  assignedDriverPhone?: string;
+  assignedVehicleInfo?: string; // e.g. "Vios - 51G-123.45"
+  agreedPrice?: number; // Negotiated price
 }
 
 export interface SearchFilters {

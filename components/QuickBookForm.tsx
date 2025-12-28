@@ -81,7 +81,7 @@ export const QuickBookForm: React.FC<QuickBookFormProps> = ({ onSubmit, classNam
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Giờ đi</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">Giờ đi (24h)</label>
           <div className="relative">
             <Clock size={16} className="absolute left-3 top-3 text-slate-400" />
             <input type="time" name="time" required value={formData.time} onChange={handleChange} className="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
